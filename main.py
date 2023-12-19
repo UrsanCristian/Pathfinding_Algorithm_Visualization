@@ -44,7 +44,7 @@ class Cell:
         self.prev = None
 
     def fill_color(self, graph_interface, color):
-        pygame.draw.rect(graph_interface, color, (self.x * cell_w, self.y * cell_h, cell_w - 3, cell_h - 3))
+        pygame.draw.rect(graph_interface, color, (self.x * cell_w, self.y * cell_h, cell_w - 1, cell_h - 1))
 
     def search_next_cells(self):
         if self.x > 0:
@@ -87,7 +87,7 @@ def final_game():
                 coord_y = pygame.mouse.get_pos()[1]
                 pos_x = coord_x // cell_w
                 pos_y = coord_y // cell_h
-                cell = grid[pos_x][pos_y]
+                cell = grid[pos_x % rows][pos_y % columns]
 
                 if cell.block_cell is False and start_point_set is True and end_point_set is True:
                     if not cell.start_cell and not cell.end_cell:
@@ -102,9 +102,10 @@ def final_game():
                     djikstra_queue.append(start_point)
 
                 elif start_point_set is True and end_point_set is False:
-                    end_point = grid[pos_x][pos_y]
-                    cell.end_cell = True
-                    end_point_set = True
+                    if not cell.start_cell:
+                        end_point = grid[pos_x][pos_y]
+                        cell.end_cell = True
+                        end_point_set = True
 
             if event.type == pygame.KEYDOWN and all_elements_added is True:
                 start_searching = True
