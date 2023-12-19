@@ -41,7 +41,7 @@ class Cell:
         self.next_cells = []
         self.queued_cell = False
         self.checked_cell = False
-        self.prior = None
+        self.prev = None
 
     def fill_color(self, graph_interface, color):
         pygame.draw.rect(graph_interface, color, (self.x * cell_w, self.y * cell_h, cell_w - 3, cell_h - 3))
@@ -115,14 +115,14 @@ def final_game():
                 current_cell.checked_cell = True
                 if current_cell == end_point:
                     running_algorithm = False
-                    while current_cell.prior != start_point:
-                        solved_line.append(current_cell.prior)
-                        current_cell = current_cell.prior
+                    while current_cell.prev != start_point:
+                        solved_line.append(current_cell.prev)
+                        current_cell = current_cell.prev
                 else:
                     for near_cell in current_cell.next_cells:
                         if near_cell.queued_cell is False and near_cell.block_cell is False:
                             near_cell.queued_cell = True
-                            near_cell.prior = current_cell
+                            near_cell.prev = current_cell
                             djikstra_queue.append(near_cell)
             else:
                 if running_algorithm:
