@@ -30,5 +30,5 @@ between the start and end points.
 * Ensure that the Pygame library and Tkinter library are installed before running the script.
 * Click on the grid cells to interact with the application.
 
-
+### Click the image to watch the video.
 [![Alt text](https://i.imgur.com/vl33cnC.png)](https://vimeo.com/manage/videos/896546761/privacy "Djikstra Algorith Visualization")
